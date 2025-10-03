@@ -22,7 +22,7 @@ git status
 
 você deve ver algo como na imagem a seguir:  
 
-<img title="Print do comando git status" alt="Alt text" src="../../../images/git-status.png">
+<img title="Print do comando git status" alt="Git status screenshot" src="./img/git-status.png">
 
 ## 3. Fazendo nosso primeiro commit
 
