@@ -59,7 +59,7 @@ Tendo o commit feito podemos checar a nossa árvore de commits e como eles estã
 git log --graph
 ```
 
-Agora que entendemos como está o estado do repositório podemos passar para outro conceito, o de branches. Uma branch é uma ramificação do estado principal do respositório (a HEAD, ou comumente a branch main), para criar uma branch nós rodando o seguinte comando:
+Agora que entendemos como está o estado do repositório podemos passar para outro conceito, o de branches. Uma branch é uma ramificação do estado principal do repositório (a HEAD, ou comumente a branch main), para criar uma branch nós rodando o seguinte comando:
 ```
 git branch changes
 ```
@@ -107,10 +107,61 @@ e depois disso somente rodar ```git commit``` pois o git quando está em merge e
 
 <center><img title="Print do comando git merge" src="img/log-pos-merge.png"></center>
 
+## 7.Conectando a um repositório remoto
 
-- conectar com repo remoto
-- subir commit
-- pedir pro carlos subir um commit
-- dar git pull
-- aprender a clonar um repo
-- ir pra branch de dev
+Já tendo em mãos os conhecimentos básicos de controle de versão, agora podemos partir pra outra parte muito importante dele, que é onde armazenaremos essas versões do nosso código. Para isso podemos utilizar diversas plataformas como GitHub, GitLabs ou então BitBucket. Para a aula de hoje estaremos fazendo o uso do GitHub uma das mais famosas plataformas de versionamento de código, no momento desta aula, pertencente a Microsoft.
+
+Para podermos conectar o nosso repositório ao GitHub primeiramente precisamos de uma conta criada lá e depois disso se faz necessário criarmos nosso token de acesso na plataforma, encontra-se a página relacionada no link: [Criar Token](https://github.com/settings/tokens). Nessa tela recomendo a criação de um Token clássico para se poder usar em diversos repositórios sem configurações extensivas. Com o token criado e armazenado num local de consulta posterior é útil rodar o seguinte comando para o git memorizar seu token:
+
+```
+git config credential.helper store
+```
+
+Com esse comando rodado quando nosso token for digitado pela próxima vez, esse helper vai deixá-lo armazenado em `~/.git-credentials` para posterior consulta, para não necessitar digitar toda vez que for feita uma operação com o repositório remoto.
+
+Tendo os tokens em mãos agora podemos partir para o próximo passo: criar o repositório remoto no site, conectarmos nele via git e aí sim subirmos nossos arquivos pra nuvem.
+
+Para fazermos isso podemos ir ao link: [Criar Repositório](https://github.com/new). Na tela, podemos escolher um nome e uma descrição para nosso novo projeto e assim criar ele sem nenhum arquivo adicional.
+
+Com o repositório criado podemos conectar nele indo na opção da imagem abaixo para pegar seu link de conexão:
+
+<center><img title="Print do GitHub mostrando a url" src="img/github-conectar.png"></center>
+
+Agora com essa url, vamos ao nosso repositório e digitamos o seguinte comando:
+
+```
+git remote add origin "url do seu repo"
+```
+
+Com esse comando adicionamos um novo repositório remoto conectado ao local com o nome origin que segue a url fornecida.
+
+Tendo o remoto configurado podemos efetuar o seguinte comando para mandar o código para o GitHub na ramificação _main_ e já de quebra configurar o origin como _upstream_, que é de certa forma pra onde seus arquivos estão indo por padrão quando realizando operações na nuvem no geral:
+```
+git push -u origin main
+```
+
+É isso! Nós rodamos nosso primeiro envio pra nuvem, e se tudo deu certo, agora nossos arquivos já estão disponíveis no GitHub para todo mundo ver. Não é legal demais da conta?
+
+## 8. Trabalhando em repositórios de terceiros
+
+Um cenário muito comum no desenvolvimento de software é manter repositórios de outrem, nesse caso não faria sentido iniciarmos nosso próprio repositório e tudo mais, nesses casos onde já existe código alocado e nós precisamos dele na nossa máquina nós clonamos esse projeto localmente e trabalhamos com ele a partir disso.
+
+Para testar essas funcionalidades usaremos o comando para clonar o repositório a seguir:
+```
+git clone "https://github.com/FelipeNegrelle/git-class.git"
+```
+
+
+Com o repositório clonado nós poderíamos agora fazer alterações e fazer commits e pushes tal qual aprendemos nas seções anteriores.
+
+Agora, quando nossos colegas de trabalho no repositório fazem pushes eles não chegam automaticamente no nosso repositório local, pra isso é necessário puxá-los do repositório remoto, que contém a árvore de commits atualizada. Eu farei um commit na aula para todos poderem puxar e ver como o pull funciona. Pra fazer isso nós rodamos o seguinte comando:
+
+```
+git pull
+```
+
+## Conclusão
+
+Pronto, agora você já tem o básico de git e GitHub pra se virar no dia a dia com desenvolvimento assíncrono, seja na base de código que for.
+
+Dicas: Sempre que precisarem de um comando mais avançado ou alguma ajuda em relação a algum comando dá para rodar um ```git <comando> --help``` pra entrar na página de manual daquele comando e entender melhor o que ele faz, ou as vezes ler sobre uma flag adicional que você pode precisar na sua jornada.
